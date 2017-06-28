@@ -54,7 +54,7 @@ ROOT_URLCONF = 'webdev.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR, 'shopee/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,9 +75,17 @@ WSGI_APPLICATION = 'webdev.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+        # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'django.db.backends.mysql',
+        # Or path to database file if using sqlite3.
+        'NAME': 'shopee',
+        'USER': 'shopee',                      # Not used with sqlite3.
+        'PASSWORD': 'password',  # Not used with sqlite3.
+        # Set to empty string for localhost. Not used with sqlite3.
+        'HOST': '127.0.0.1',
+        # Set to empty string for default. Not used with sqlite3.
+        'PORT': '3306',
+    },
 }
 
 
@@ -118,3 +126,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+# STATIC_ROOT = BASE_DIR + STATIC_URL
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+MEDIA_ROOT = (
+    BASE_DIR
+)
+
+
+MEDIA_URL = '/static/images/'
